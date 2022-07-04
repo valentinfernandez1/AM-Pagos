@@ -5,8 +5,10 @@ import CustomError from '../errors/customError';
 export default (err: Error, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof CustomError) {
     res.status(err.statusCode).send({ errors: err.serializeErrors() });
+    console.log(err);
     return;
   }
+
   console.log(err);
   res.status(400).send({
     errors: [{
