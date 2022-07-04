@@ -1,1 +1,1 @@
-This is a Boilerplate repository, meant to be use as base for express backend proyects.
+This is a Boilerplate repository, ment to be use as base for express backend proyects.
