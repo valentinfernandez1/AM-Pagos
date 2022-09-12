@@ -1,40 +1,13 @@
-import express from 'express';
-import logger from 'morgan';
-import NotFoundError from './src/errors/notFoundError';
-import routes from './src/router/index.routes';
-import errorHandler from './src/middlewares/errorHandler';
-
-const app = express();
+import app from "./app";
 
 if (!process.env.PORT) {
-  require('dotenv').config();
+  require("dotenv").config();
 }
 
-//Definicion del conjunto de rutas correspondiente a user
-for (const route of routes.userRoutes) {
-  app
-    .use(express.json({limit: '50mb'}))
-    .use(logger('dev'))
-    .use("/api/user", route);
-}
+const PORT = process.env.PORT || 8000;
 
-//Definicion de las rutas para utilities. Ej /health
-for (const route of routes.utilityRoutes) {
-  app
-    .use(express.json({limit: '50mb'}))
-    .use(logger('dev'))
-    .use("/", route);
-}
+//Connects to MongoDB and starts recurrent
 
-app.all('*', (req: express.Request) => {
-  throw new NotFoundError(req.path);
-});
-
-//Error Handlers
-app.use(errorHandler);
-
-
-
-app.listen(process.env.PORT, () => {
-  console.log(`server listing on port ${process.env.PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server listing on port ${process.env.PORT}`);
 });
