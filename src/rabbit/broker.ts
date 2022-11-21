@@ -2,7 +2,7 @@ require("dotenv").config();
 const amqp = require("amqplib");
 const _ = require("lodash");
 import client, { Connection, Channel } from "amqplib";
-const rabitHost = process.env.RABIT_URL || "amqp://localhost:5672";
+const rabitHost = process.env.RABBIT_URL || "amqp://localhost:5672";
 class Broker {
   queues: {};
   connection: Connection;

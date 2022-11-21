@@ -4,16 +4,23 @@ import verifyTxHash from "../helpers/verifyTxHash";
 import PendingPayment, {
   E_paymentStatus,
   I_PendingPayment,
-} from "models/PendingPayment";
+} from "../models/PendingPayment";
 import { publish } from "../rabbit/rabbitRepo";
 import validateJWT from "../helpers/validateJWT";
+import { check } from "express-validator";
 
 const router = Router();
 
 //Define routes Here
 router.put(
   "/payment/:userId",
-  [validateJWT],
+  [
+    /* [validateJWT], */ check(
+      "paymentId",
+      "Invalid paymentId format"
+    ).isString(),
+    check("tx_hash").isString(),
+  ],
   async (req: Request, res: Response, next: NextFunction) => {
     const { paymentId, tx_hash } = req.body;
 
@@ -29,7 +36,7 @@ router.put(
 
     const verificationResponse = await verifyTxHash(tx_hash, pendingPayment);
 
-    if (!verificationResponse) {
+    if (!verificationResponse.result) {
       return res.status(400).json({
         msg: `Invalid payment. ${verificationResponse.error}`,
       });

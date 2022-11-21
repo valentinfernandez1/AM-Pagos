@@ -9,7 +9,7 @@ const router = Router();
 router.get(
   "/payment/:userId/:paymentId",
   [
-    validateJWT,
+    /* validateJWT, */
     check("userId", "Invalid userId format").isNumeric(),
     check("paymentId", "Invalid paymentId format").isNumeric(),
     validateRequest,

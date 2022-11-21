@@ -1,6 +1,6 @@
 import { I_PendingPayment } from "../models/PendingPayment";
 import Web3 from "web3";
-
+require("dotenv").config();
 import usdtABI from "../constants/usdt.json";
 const InputDataDecoder = require("ethereum-input-data-decoder");
 
@@ -23,10 +23,8 @@ const verifyTxHash = async (
   try {
     //Get Web3 provider
     const web3 = new Web3(process.env.RPC_URL);
-
     //Get Tx details from blockchain network
     const result = await web3.eth.getTransaction(tx_hash);
-
     //Decode the input field of the txResult to get the addressTo and value
     const resultDecode = decodeInput(result.input);
 
@@ -43,7 +41,7 @@ const verifyTxHash = async (
     txAddressFrom = result.from;
   } catch (error) {
     console.log(error);
-    return;
+    return { result: false, error };
   }
 
   txAddressFrom != payment.addressFrom

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction, Router } from "express";
 import { check } from "express-validator";
-import fieldVerifications from "../helpers/fieldVerifications";
+import fieldVerifications from "../middlewares/fieldVerifications";
 import validateRequest from "../middlewares/validateRequest";
 import PendingPayment, {
   E_paymentStatus,
@@ -11,8 +11,8 @@ import { E_Sort } from "../utils/enums";
 const router = Router();
 const BASE_DATE = new Date(1900, 0, 1);
 
-router.put(
-  "/payment/:userId/txHistory",
+router.get(
+  "/txHistory/:userId",
   [
     /* validateJWT, */
     check("userId", "Invalid userId format").isNumeric(),

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction, Router } from "express";
 import { check } from "express-validator";
-import fieldVerifications from "../helpers/fieldVerifications";
+import fieldVerifications from "../middlewares/fieldVerifications";
 import validateRequest from "../middlewares/validateRequest";
 import { E_Sort } from "../utils/enums";
 import validateJWT from "../helpers/validateJWT";

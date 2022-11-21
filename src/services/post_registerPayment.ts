@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { Request, Response, NextFunction } from "express";
 import { check } from "express-validator";
+import fieldVerifications from "../middlewares/fieldVerifications";
 import validateJWT from "../helpers/validateJWT";
 import validateRequest from "../middlewares/validateRequest";
 require("dotenv").config();
@@ -16,10 +17,12 @@ const ADDRESS_TO = process.env.COMPANY_WALLET_ADDRESS;
 router.post(
   "/payment/:userId",
   [
-    validateJWT,
+    /* validateJWT, */
     check("userId", "invalid userId"),
-    check("order_id", "invalid order_id").isNumeric(),
-    check("amout", "invalid amount").isNumeric(),
+    check("order_id", "invalid order_id")
+      .isString()
+      .custom(fieldVerifications.orderNotRegistered),
+    check("amount", "invalid amount").isNumeric(),
     check("fromAddress", "invalid wallet address format").isEthereumAddress(),
     validateRequest,
   ],
