@@ -8,6 +8,6 @@ Las consultas ya se encuentran creadas, dentro del archivo llamado `thunder-coll
 
 ![image](https://user-images.githubusercontent.com/33705477/203122282-c3db9b1d-7a9c-4fb0-8f81-29c61fb08155.png)
 
-Presionar en las 3 lineas y tocar `Import`.
+Presionar en las 3 lineas y tocar `Import`. Seleccionar el archivo `thunder-collection_Micro Pagos.json` dentro de la raiz del repositorio y listo.
 
 ![image](https://user-images.githubusercontent.com/33705477/203122389-da2932b3-707c-442e-a96f-6ec9591b3a42.png)
