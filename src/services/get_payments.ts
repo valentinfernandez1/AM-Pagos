@@ -57,7 +57,9 @@ router.get(
       res
         .status(200)
         .json({ amountPayments: paymentsDTO.length, payments: paymentsDTO });
-    } catch (error) {}
+    } catch (error) {
+      res.status(500).json(error);
+    }
   }
 );
 

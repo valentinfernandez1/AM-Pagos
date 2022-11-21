@@ -25,7 +25,9 @@ router.get(
         res.status(400).json({ msg: "payment not found", payment: {} });
       }
       res.status(200).json({ payment: payment[0] });
-    } catch (error) {}
+    } catch (error) {
+      res.status(500).json(error);
+    }
   }
 );
 
