@@ -1,8 +1,5 @@
 FROM node:alpine
 
-ENV PORT 3001
-ENV SQLDB Server=tcp:criptocountry.database.windows.net,1433;Initial Catalog=criptoland;Persist Security Info=False;User ID=criptoadmin;Password={};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
-
 WORKDIR /backend
 
 COPY package*.json ./
@@ -14,6 +11,6 @@ COPY . .
 
 RUN npm run build
 
-EXPOSE 3001
+EXPOSE 8000
 
-CMD ["node", "./dist/index.js"]
+CMD ["npm", "run", "dev"]

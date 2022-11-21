@@ -5,7 +5,7 @@
     "outDir": "dist",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "sourceMap": true,
     "baseUrl": "./src",
     "incremental": true,
@@ -17,12 +17,6 @@
   "ts-node": {
     "transpileOnly": false
   },
-  "include": [
-    "src/**/*.ts",
-    "index.tsts",
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["src/**/*.ts", "index.ts"],
+  "exclude": ["node_modules", "dist"]
 }

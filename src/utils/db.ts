@@ -1,11 +1,25 @@
-import {connect, ConnectionPool} from 'mssql'
+const mongoose = require("mongoose");
 
-let connection: Promise<ConnectionPool>;
+let connectionRetries: number = 0;
 
-export const newConnection = async () => connect(process.env.SQLDB);
+const connectWithRetry = async (mongoURL) => {
+  return mongoose
+    .connect(mongoURL)
+    .then(() => {
+      console.log("Connected to MongoDB");
+    })
+    .catch((err) => {
+      if (connectionRetries < 5) {
+        console.error(
+          "Failed to connect to mongo on startup - retrying in 5 sec"
+        );
+        console.log(`Retries Left ${(5 - connectionRetries) | 0} \n`);
+        connectionRetries++;
+        setTimeout(connectWithRetry, 2000);
+      } else {
+        console.log("Connection to MongoDB Failed");
+      }
+    });
+};
 
-export default async function mssql() {
-    if (connection) return connection;
-    connection = newConnection();
-    return connection;
-}
+export default connectWithRetry;
